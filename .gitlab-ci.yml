@@ -1,0 +1,21 @@
+stages:
+  - build
+
+build:
+  stage: build
+  only:
+    - master
+    - tags
+  tags:
+    - docker
+  image: bellsoft/liberica-openjre-alpine:17
+  variables:
+    GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx1g
+    MAVEN_REGISTRY_URL: https://gl.playa.ru/api/v4/projects/$CI_PROJECT_ID/packages/maven
+    CREDENTIALS_NAME: Job-Token
+    CREDENTIALS_VALUE: $CI_JOB_TOKEN
+  script:
+    - ./gradlew build publish
+  artifacts:
+    paths:
+      - build/libs

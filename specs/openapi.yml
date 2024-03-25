@@ -1,0 +1,506 @@
+---
+openapi: 3.0.3
+info:
+  title: treasure-service API
+  version: 1.0.0-SNAPSHOT
+tags:
+  - name: CashboxApi
+  - name: DebtApi
+  - name: DepositApi
+  - name: EventApi
+  - name: TransactionApi
+paths:
+  /api/treasure/cashbox:
+    get:
+      tags:
+        - CashboxApi
+      operationId: CashboxResource_getCashboxGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cashbox'
+  /api/treasure/debt:
+    get:
+      tags:
+        - DebtApi
+      operationId: getAllDebtGET
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebtSearchParameter'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageDebt'
+  /api/treasure/debt/{uuid}:
+    get:
+      tags:
+        - DebtApi
+      description: Получение объекта
+      operationId: getDebtGET
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Debt'
+  /api/treasure/deposit:
+    get:
+      tags:
+        - DepositApi
+      operationId: getAllDepositGET
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositSearchParameter'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageDeposit'
+    put:
+      tags:
+        - DepositApi
+      operationId: DepositResource_updateDepositPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Deposit'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deposit'
+    post:
+      tags:
+        - DepositApi
+      operationId: DepositResource_createDepositPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Deposit'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deposit'
+  /api/treasure/deposit/{uuid}:
+    get:
+      tags:
+        - DepositApi
+      description: Получение объекта
+      operationId: getDepositGET
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deposit'
+    delete:
+      tags:
+        - DepositApi
+      description: Удаление объекта
+      operationId: deleteDepositDELETE
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+      responses:
+        "204":
+          description: No Content
+  /api/treasure/event:
+    get:
+      tags:
+        - EventApi
+      operationId: getAllEventGET
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSearchParameter'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEvent'
+    put:
+      tags:
+        - EventApi
+      operationId: EventResource_updateEventPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+    post:
+      tags:
+        - EventApi
+      operationId: EventResource_createEventPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+  /api/treasure/event/{uuid}:
+    get:
+      tags:
+        - EventApi
+      description: Получение объекта
+      operationId: getEventGET
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+    delete:
+      tags:
+        - EventApi
+      description: Удаление объекта
+      operationId: deleteEventDELETE
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+      responses:
+        "204":
+          description: No Content
+  /api/treasure/transaction:
+    get:
+      tags:
+        - TransactionApi
+      operationId: getAllTransactionGET
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionSearchParameter'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageTransaction'
+    put:
+      tags:
+        - TransactionApi
+      operationId: TransactionResource_updateTransactionPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+    post:
+      tags:
+        - TransactionApi
+      operationId: TransactionResource_createTransactionPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+  /api/treasure/transaction/{uuid}:
+    get:
+      tags:
+        - TransactionApi
+      description: Получение объекта
+      operationId: getTransactionGET
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+    delete:
+      tags:
+        - TransactionApi
+      description: Удаление объекта
+      operationId: deleteTransactionDELETE
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+      responses:
+        "204":
+          description: No Content
+components:
+  schemas:
+    Cashbox:
+      type: object
+      properties:
+        deposit:
+          type: number
+        lastUpdateDate:
+          $ref: '#/components/schemas/Instant'
+    Debt:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/Event'
+        deposit:
+          $ref: '#/components/schemas/Deposit'
+    DebtSearchParameter:
+      type: object
+      properties:
+        offset:
+          format: int32
+          type: integer
+        numberOfRows:
+          format: int32
+          type: integer
+    Deposit:
+      description: Депозит
+      required:
+        - uuid
+        - name
+        - deposit
+      type: object
+      properties:
+        uuid:
+          description: Уникальный идентификатор
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+        name:
+          description: Название
+          type: string
+        deposit:
+          description: Сумма
+          type: number
+    DepositSearchParameter:
+      type: object
+      properties:
+        offset:
+          format: int32
+          type: integer
+        numberOfRows:
+          format: int32
+          type: integer
+    Event:
+      type: object
+      properties:
+        uuid:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+        contribution:
+          type: number
+        total:
+          type: number
+        deadline:
+          $ref: '#/components/schemas/Instant'
+        creationDate:
+          $ref: '#/components/schemas/Instant'
+        author:
+          $ref: '#/components/schemas/Option'
+        deletionDate:
+          $ref: '#/components/schemas/Instant'
+    EventSearchParameter:
+      type: object
+      properties:
+        offset:
+          format: int32
+          type: integer
+        numberOfRows:
+          format: int32
+          type: integer
+        name:
+          type: string
+    Instant:
+      format: date-time
+      type: string
+      example: 2022-03-10T16:15:50Z
+    Meta:
+      type: object
+      properties:
+        total:
+          format: int32
+          type: integer
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Option:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+    PageDebt:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        context:
+          type: array
+          items:
+            $ref: '#/components/schemas/Debt'
+    PageDeposit:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        context:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deposit'
+    PageEvent:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        context:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    PageTransaction:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        context:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+    Paging:
+      type: object
+      properties:
+        start:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+    Transaction:
+      type: object
+      properties:
+        uuid:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+        cash:
+          type: number
+        type:
+          $ref: '#/components/schemas/TransactionType'
+        person:
+          $ref: '#/components/schemas/Option'
+        event:
+          $ref: '#/components/schemas/Option'
+        transactionDate:
+          $ref: '#/components/schemas/Instant'
+        creationDate:
+          $ref: '#/components/schemas/Instant'
+        author:
+          $ref: '#/components/schemas/Option'
+        deletionDate:
+          $ref: '#/components/schemas/Instant'
+    TransactionSearchParameter:
+      type: object
+      properties:
+        offset:
+          format: int32
+          type: integer
+        numberOfRows:
+          format: int32
+          type: integer
+        name:
+          type: string
+        user:
+          $ref: '#/components/schemas/UUID'
+        event:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/TransactionType'
+    TransactionType:
+      enum:
+        - NONE
+        - COST
+        - CONTRIBUTION
+        - WRITE_OFF
+        - PAID
+        - EARNED
+      type: string
+    UUID:
+      format: uuid
+      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      type: string
