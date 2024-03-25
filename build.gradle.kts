@@ -53,7 +53,7 @@ kotlin {
 }
 
 val generatedDir: File = layout.buildDirectory.dir("generated").get().asFile
-val targetPackageName = "ru.playa.hc.intercom"
+val targetPackageName = "ru.onotoliy.opposite.treasure.api"
 
 openApiGenerate {
     generatorName = "kotlin"
