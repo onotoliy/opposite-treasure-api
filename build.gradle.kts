@@ -87,20 +87,12 @@ val generateApi by tasks.registering(Copy::class) {
     finalizedBy(copyReadme)
 }
 
-fun RepositoryHandler.mavenGitlab() = System.getenv("MAVEN_REGISTRY_URL")?.let {
-    maven(it) {
-        credentials(HttpHeaderCredentials::class) {
-            name = System.getenv("CREDENTIALS_NAME")
-            value = System.getenv("CREDENTIALS_VALUE")
+repositories {
+    maven("https://maven.pkg.github.com/onotoliy/opposite-treasure-api") {
+        name = "GitHubPackages"
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
         }
-        authentication {
-            create("header", HttpHeaderAuthentication::class)
-        }
-    }
-}
-
-publishing {
-    repositories {
-        mavenGitlab()
     }
 }

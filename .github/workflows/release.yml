@@ -19,3 +19,7 @@ jobs:
         with:
           name: libs
           path: build/libs
+      - name: Publish package
+        run: ./gradlew publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
