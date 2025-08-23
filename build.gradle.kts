@@ -1,110 +1,116 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
-    id("fr.brouillard.oss.gradle.jgitver")
-    id("org.openapi.generator")
-    id("maven-publish")
+    kotlin("multiplatform") version "1.9.22" // kotlin_version
+    kotlin("plugin.serialization") version "1.9.22" // kotlin_version
+    id("org.openapi.generator") version "6.0.1"
 }
 
-val coroutinesVersion = property("coroutines.version") as String
-val serializationVersion = property("serialization.version") as String
-val ktorVersion = property("ktor.version") as String
+group = "org.openapitools"
+version = "1.0.0"
+
+val kotlin_version = "1.9.22"
+val coroutines_version = "1.10.2"
+val serialization_version = "1.8.1"
+val ktor_version = "3.1.3"
 
 repositories {
     mavenCentral()
 }
 
 kotlin {
-    jvm {
-        jvmToolchain(17)
-        withJava()
-        testRuns.named("test") {
-            executionTask.configure {
-                useJUnitPlatform()
-            }
-        }
-    }
+    jvm()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
     js {
         browser()
+        nodejs()
     }
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serialization_version")
 
-                api("io.ktor:ktor-client-core:$ktorVersion")
-                api("io.ktor:ktor-client-serialization:$ktorVersion")
-                api("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                api("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                api("io.ktor:ktor-client-core:$ktor_version")
+                api("io.ktor:ktor-client-serialization:$ktor_version")
+                api("io.ktor:ktor-client-content-negotiation:$ktor_version")
+                api("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+
+                api("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
             }
         }
-        val commonTest by getting {
+
+        commonTest {
             dependencies {
                 implementation(kotlin("test"))
+                implementation("io.ktor:ktor-client-mock:$ktor_version")
             }
         }
-        val jvmMain by getting
-        val jvmTest by getting
-        val jsMain by getting
-        val jsTest by getting
+
+        jvmMain {
+            dependencies {
+                implementation(kotlin("stdlib-jdk7"))
+                implementation("io.ktor:ktor-client-cio-jvm:$ktor_version")
+            }
+        }
+
+        jvmTest {
+            dependencies {
+                implementation(kotlin("test-junit"))
+            }
+        }
+
+        iosMain {
+            dependencies {
+                api("io.ktor:ktor-client-ios:$ktor_version")
+            }
+        }
+
+        jsMain {
+            dependencies {
+                api("io.ktor:ktor-client-js:$ktor_version")
+            }
+        }
     }
 }
 
-val generatedDir: File = layout.buildDirectory.dir("generated").get().asFile
-val targetPackageName = "ru.onotoliy.opposite.treasure.api"
-
 openApiGenerate {
-    generatorName = "kotlin"
-    library = "multiplatform"
-    inputSpec = "$rootDir/specs/openapi.yml"
-    outputDir = generatedDir.canonicalPath
-    cleanupOutput = true
-    packageName = targetPackageName
-    configOptions = mapOf(
-        "apiSuffix" to ""
+    generatorName.set("kotlin-multiplatform")
+    inputSpec.set("$rootDir/specs/openapi.yml") // Путь к вашей OpenAPI спецификации
+    outputDir.set("$buildDir/generated") // Папка для сгенерированного кода
+    apiPackage.set("com.example.api")
+    modelPackage.set("com.example.model")
+    invokerPackage.set("com.example.invoker")
+    configOptions.putAll(
+        mapOf(
+            "dateLibrary" to "kotlinx-datetime",
+            "serializationLibrary" to "kotlinx_serialization"
+            "library" to "multiplatform"
+        )
     )
 }
 
-val generatedKotlinDir = generatedDir.resolve("src/commonMain/kotlin")
-val targetKotlinDir = rootDir.resolve("src/commonMain/kotlin")
-val targetReadmeDir = rootDir.resolve("readme")
-
-val copyReadme by tasks.registering(Copy::class) {
-    doFirst { targetReadmeDir.deleteRecursively() }
-    from(generatedDir) {
-        include("README.md", "docs/**/*")
+tasks {
+    register("generateOpenApiClient") {
+        dependsOn("openApiGenerate")
     }
-    into(targetReadmeDir)
-}
 
-val generateApi by tasks.registering(Copy::class) {
-    dependsOn(tasks.openApiGenerate)
-    doFirst { targetKotlinDir.deleteRecursively() }
-    from(generatedKotlinDir)
-    into(targetKotlinDir)
-    finalizedBy(copyReadme)
-}
-
-repositories {
-    maven("https://maven.pkg.github.com/onotoliy/opposite-treasure-api") {
-        name = "GitHubPackages"
-        credentials {
-            username = System.getenv("GH_USERNAME")
-            password = System.getenv("GH_TOKEN")
-        }
-    }
-}
-
-publishing {
-    repositories {
-        maven("https://maven.pkg.github.com/onotoliy/opposite-treasure-api") {
-            name = "GitHubPackages"
-            credentials {
-                username = System.getenv("GH_USERNAME")
-                password = System.getenv("GH_TOKEN")
+    register("iosTest") {
+        val device = project.findProperty("device")?.toString() ?: "iPhone 8"
+        dependsOn("linkDebugTestIosX64")
+        group = JavaBasePlugin.VERIFICATION_GROUP
+        description = "Execute unit tests on ${device} simulator"
+        doLast {
+            val binary = kotlin.targets.getByName<KotlinNativeTarget>("iosX64").binaries.getTest("DEBUG")
+            exec {
+                commandLine("xcrun", "simctl", "spawn", device, binary.outputFile)
             }
         }
+    }
+    register("test") {
+        dependsOn("allTests")
     }
 }
