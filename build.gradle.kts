@@ -108,9 +108,23 @@ tasks {
 
 publishing {
     publications {
-        withType<MavenPublication> {
+        create<MavenPublication>("common") {
+            from(components["kotlin"])
             groupId = group.toString()
-            artifactId = "opposite-treasure-service-api"
+            artifactId = "opposite-treasure-service-api-common"
+            version = version
+        }
+        create<MavenPublication>("jvm") {
+            from(components["jvm"])
+            groupId = group.toString()
+            artifactId = "opposite-treasure-service-api-jvm"
+            version = version
+        }
+
+        create<MavenPublication>("js") {
+            from(components["js"])
+            groupId = group.toString()
+            artifactId = "opposite-treasure-service-api-js"
             version = version
         }
     }
