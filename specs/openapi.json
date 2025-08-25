@@ -1,0 +1,53 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081/api/treasure/v1",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/cashbox": {
+      "get": {
+        "tags": [
+          "cashbox-resource"
+        ],
+        "summary": "Получение информации о кассе",
+        "description": "Этот метод возвращает данные о кассе",
+        "operationId": "get_3",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cashbox"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cashbox": {
+        "type": "object",
+        "properties": {
+          "deposit": {
+            "type": "number"
+          },
+          "lastUpdateDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

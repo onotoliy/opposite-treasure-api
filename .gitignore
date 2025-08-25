@@ -15,3 +15,5 @@ out/
 **/build/
 !src/**/build/
 /.kotlin/
+/kotlin-js-store/
+/src/

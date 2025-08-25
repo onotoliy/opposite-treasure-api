@@ -1,15 +1,16 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    kotlin("multiplatform") version "1.9.22" // kotlin_version
-    kotlin("plugin.serialization") version "1.9.22" // kotlin_version
-    id("org.openapi.generator") version "6.0.1"
+    kotlin("multiplatform") version "2.1.21" // kotlin_version
+    kotlin("plugin.serialization") version "2.1.21" // kotlin_version
+    id("org.openapi.generator") version "7.14.0"
+    id("maven-publish")
 }
 
-group = "org.openapitools"
-version = "1.0.0"
+group = "com.github.onotoliy.opposite.treasure"
+version = project.hasProperty('newVersion') ? project.newVersion : '1.0.0-SNAPSHOT'
 
-val kotlin_version = "1.9.22"
+val kotlin_version = "2.1.21"
 val coroutines_version = "1.10.2"
 val serialization_version = "1.8.1"
 val ktor_version = "3.1.3"
@@ -20,9 +21,7 @@ repositories {
 
 kotlin {
     jvm()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+
     js {
         browser()
         nodejs()
@@ -63,12 +62,6 @@ kotlin {
             }
         }
 
-        iosMain {
-            dependencies {
-                api("io.ktor:ktor-client-ios:$ktor_version")
-            }
-        }
-
         jsMain {
             dependencies {
                 api("io.ktor:ktor-client-js:$ktor_version")
@@ -78,16 +71,16 @@ kotlin {
 }
 
 openApiGenerate {
-    generatorName.set("kotlin-multiplatform")
-    inputSpec.set("$rootDir/specs/openapi.yml") // Путь к вашей OpenAPI спецификации
-    outputDir.set("$buildDir/generated") // Папка для сгенерированного кода
-    apiPackage.set("com.example.api")
-    modelPackage.set("com.example.model")
-    invokerPackage.set("com.example.invoker")
+    generatorName.set("kotlin")
+    inputSpec.set(layout.projectDirectory.file("/specs/openapi.json").asFile.toURI().toString()) // Путь к вашей OpenAPI спецификации
+    outputDir.set(layout.buildDirectory.dir("/generated").get().toString())
+    packageName.set("com.github.onotoliy.opposite.treasure.client")
+    apiPackage.set("com.github.onotoliy.opposite.treasure.api")
+    modelPackage.set("com.github.onotoliy.opposite.treasure.model")
+    invokerPackage.set("com.github.onotoliy.opposite.treasure.invoker")
     configOptions.putAll(
         mapOf(
             "dateLibrary" to "kotlinx-datetime",
-            "serializationLibrary" to "kotlinx_serialization"
             "library" to "multiplatform"
         )
     )
@@ -98,19 +91,57 @@ tasks {
         dependsOn("openApiGenerate")
     }
 
-    register("iosTest") {
-        val device = project.findProperty("device")?.toString() ?: "iPhone 8"
-        dependsOn("linkDebugTestIosX64")
-        group = JavaBasePlugin.VERIFICATION_GROUP
-        description = "Execute unit tests on ${device} simulator"
+    register("copyGeneratedSources") {
         doLast {
-            val binary = kotlin.targets.getByName<KotlinNativeTarget>("iosX64").binaries.getTest("DEBUG")
-            exec {
-                commandLine("xcrun", "simctl", "spawn", device, binary.outputFile)
+            val generatedSrcDir = layout.buildDirectory.dir("/generated/src")
+            val targetDir = file("$projectDir/src")
+
+            delete(targetDir)
+
+            copy {
+                from(generatedSrcDir)
+                into(targetDir)
             }
         }
     }
-    register("test") {
-        dependsOn("allTests")
+
+    register("setVersion") {
+        val newVersion = project.findProperty("newVersion") as String?
+        doLast {
+            if (newVersion == null) {
+                throw GradleException("Please specify newVersion, e.g., -PnewVersion=1.2.3")
+            }
+
+            // Обновляем version в gradle.properties
+            val propsFile = file("gradle.properties")
+            val props = java.util.Properties()
+            propsFile.inputStream().use { props.load(it) }
+
+            props["VERSION_NAME"] = newVersion
+
+            propsFile.outputStream().use { props.store(it, null) }
+
+            println("Updated version to $newVersion in gradle.properties")
+        }
+    }
+}
+
+publishing {
+    publications {
+        withType<MavenPublication> {
+            groupId = group.toString()
+            artifactId = "opposite-treasure-service-api"
+            version = version
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/onotoliy/opposite-treasure-api")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }

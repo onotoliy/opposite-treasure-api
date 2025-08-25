@@ -1,2 +1,2 @@
-rootProject.name = "openapi-client-generator"
+rootProject.name = "opposite-treasure-service-api"
 
