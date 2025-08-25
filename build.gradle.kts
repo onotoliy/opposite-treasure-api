@@ -104,26 +104,6 @@ tasks {
             }
         }
     }
-
-    register("setVersion") {
-        val newVersion = project.findProperty("newVersion") as String?
-        doLast {
-            if (newVersion == null) {
-                throw GradleException("Please specify newVersion, e.g., -PnewVersion=1.2.3")
-            }
-
-            // Обновляем version в gradle.properties
-            val propsFile = file("gradle.properties")
-            val props = java.util.Properties()
-            propsFile.inputStream().use { props.load(it) }
-
-            props["VERSION_NAME"] = newVersion
-
-            propsFile.outputStream().use { props.store(it, null) }
-
-            println("Updated version to $newVersion in gradle.properties")
-        }
-    }
 }
 
 publishing {
