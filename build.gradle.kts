@@ -93,8 +93,8 @@ tasks {
 
     register("copyGeneratedSources") {
         doLast {
-            val generatedSrcDir = layout.buildDirectory.dir("/generated/src")
-            val targetDir = file("$projectDir/src")
+            val generatedSrcDir = layout.buildDirectory.dir("generated/src")
+            val targetDir = layout.projectDirectory.dir("src")
 
             delete(targetDir)
 
