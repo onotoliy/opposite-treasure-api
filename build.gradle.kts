@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.github.onotoliy.opposite.treasure"
-version = project.hasProperty('newVersion') ? project.property('newVersion') : '1.0.0-SNAPSHOT'
+version = if (project.hasProperty("newVersion")) { project.property("newVersion") as String } else { "1.0.0-SNAPSHOT" }
 
 val kotlin_version = "2.1.21"
 val coroutines_version = "1.10.2"
