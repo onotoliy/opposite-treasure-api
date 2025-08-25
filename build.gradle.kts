@@ -119,8 +119,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/onotoliy/opposite-treasure-api")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv("GH_USERNAME")
+                password = System.getenv("GH_TOKEN")
             }
         }
     }
