@@ -40,6 +40,8 @@ kotlin {
 
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
             }
+            kotlin.srcDir("src/main/kotlin")
+
         }
 
         commonTest {
