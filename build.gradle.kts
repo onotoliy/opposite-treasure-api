@@ -72,8 +72,8 @@ kotlin {
 
 openApiGenerate {
     generatorName.set("kotlin")
-    inputSpec.set(layout.projectDirectory.file("/specs/openapi.json").asFile.toURI().toString()) // Путь к вашей OpenAPI спецификации
-    outputDir.set(layout.buildDirectory.dir("/generated").get().toString())
+    inputSpec.set(layout.projectDirectory.file("specs/openapi.json").asFile.toURI().toString())
+    outputDir.set(layout.buildDirectory.dir("generated").get().toString())
     packageName.set("com.github.onotoliy.opposite.treasure.client")
     apiPackage.set("com.github.onotoliy.opposite.treasure.api")
     modelPackage.set("com.github.onotoliy.opposite.treasure.model")
