@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    kotlin("multiplatform") version "2.1.21" // kotlin_version
-    kotlin("plugin.serialization") version "2.1.21" // kotlin_version
+    kotlin("multiplatform") version "2.2.0" // kotlin_version
+    kotlin("plugin.serialization") version "2.2.0" // kotlin_version
     id("org.openapi.generator") version "7.14.0"
     id("maven-publish")
 }
@@ -10,7 +10,7 @@ plugins {
 group = "com.github.onotoliy.opposite.treasure"
 version = if (project.hasProperty("newVersion")) { project.property("newVersion") as String } else { "1.0.0-SNAPSHOT" }
 
-val kotlin_version = "2.1.21"
+val kotlin_version = "2.2.0"
 val coroutines_version = "1.10.2"
 val serialization_version = "1.8.1"
 val ktor_version = "3.1.3"
