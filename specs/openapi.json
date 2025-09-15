@@ -356,31 +356,6 @@
         }
       }
     },
-    "/user/current/roles": {
-      "get": {
-        "tags": [
-          "user-resource"
-        ],
-        "summary": "Получение объекта",
-        "operationId": "getCurrentUserRolesUserResource",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "uniqueItems": true
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/transaction/{uuid}": {
       "get": {
         "tags": [
