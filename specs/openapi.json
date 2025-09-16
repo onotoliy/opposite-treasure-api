@@ -22,6 +22,7 @@
           {
             "name": "name",
             "in": "query",
+            "description": "Название",
             "required": false,
             "schema": {
               "type": "string"
@@ -30,24 +31,29 @@
           {
             "name": "user",
             "in": "query",
+            "description": "Уникальный идентификатор пользователя",
             "required": false,
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
           },
           {
             "name": "event",
             "in": "query",
+            "description": "Уникальный идентификатор события",
             "required": false,
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
           },
           {
             "name": "type",
             "in": "query",
+            "description": "Тип",
             "required": false,
             "schema": {
               "type": "string",
@@ -64,21 +70,21 @@
           {
             "name": "offset",
             "in": "query",
+            "description": "Количество записей которое необходимо пропустить",
             "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 0
+              "format": "int32"
             }
           },
           {
             "name": "numberOfRows",
             "in": "query",
+            "description": "Размер страницы",
             "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 10
+              "format": "int32"
             }
           }
         ],
@@ -159,12 +165,13 @@
         "tags": [
           "event-resource"
         ],
-        "summary": "Поиск событий",
+        "summary": "Поиск транзакций",
         "operationId": "getAllEventResource",
         "parameters": [
           {
             "name": "name",
             "in": "query",
+            "description": "Название",
             "required": false,
             "schema": {
               "type": "string"
@@ -173,21 +180,21 @@
           {
             "name": "offset",
             "in": "query",
+            "description": "Количество записей которое необходимо пропустить",
             "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 0
+              "format": "int32"
             }
           },
           {
             "name": "numberOfRows",
             "in": "query",
+            "description": "Размер страницы",
             "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 10
+              "format": "int32"
             }
           }
         ],
@@ -263,92 +270,120 @@
         }
       }
     },
-    "/user/register/exception": {
-      "post": {
+    "/deposit": {
+      "get": {
         "tags": [
-          "user-resource"
+          "deposit-resource"
         ],
-        "summary": "Получение объекта",
-        "operationId": "registrationUserResource",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExceptionDevice"
-              }
+        "summary": "Поиск депозитов",
+        "operationId": "getAllDepositResource",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Поисковая строка",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
+          {
+            "name": "enable",
+            "in": "query",
+            "description": "Активные пользователи",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Количество записей которое необходимо пропустить",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "numberOfRows",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        }
-      }
-    },
-    "/user/list": {
-      "get": {
-        "tags": [
-          "user-resource"
         ],
-        "summary": "Получение объекта",
-        "operationId": "getAllUserResource",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Option"
-                  }
+                  "$ref": "#/components/schemas/PageDeposit"
                 }
               }
             }
           }
         }
-      }
-    },
-    "/user/list/full": {
-      "get": {
+      },
+      "put": {
         "tags": [
-          "user-resource"
+          "deposit-resource"
         ],
-        "summary": "Получение объекта",
-        "operationId": "getFullDTOAllUserResource",
+        "summary": "Изменение депозита",
+        "operationId": "updateDepositResource",
+        "parameters": [
+          {
+            "name": "dto",
+            "in": "query",
+            "description": "Депозит",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Deposit"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  }
+                  "$ref": "#/components/schemas/Deposit"
                 }
               }
             }
           }
         }
-      }
-    },
-    "/user/current": {
-      "get": {
+      },
+      "post": {
         "tags": [
-          "user-resource"
+          "deposit-resource"
         ],
-        "summary": "Получение объекта",
-        "operationId": "getCurrentUserUserResource",
+        "summary": "Создание депозита",
+        "operationId": "createDepositResource",
+        "parameters": [
+          {
+            "name": "dto",
+            "in": "query",
+            "description": "Депозит",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Deposit"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Option"
+                  "$ref": "#/components/schemas/Deposit"
                 }
               }
             }
@@ -367,11 +402,13 @@
           {
             "name": "uuid",
             "in": "path",
+            "description": "Уникальный идентификатор объекта",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
           }
         ],
         "responses": {
@@ -397,11 +434,13 @@
           {
             "name": "uuid",
             "in": "path",
+            "description": "Уникальный идентификатор объекта",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
           }
         ],
         "responses": {
@@ -422,11 +461,13 @@
           {
             "name": "uuid",
             "in": "path",
+            "description": "Уникальный идентификатор объекта",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
           }
         ],
         "responses": {
@@ -452,11 +493,13 @@
           {
             "name": "uuid",
             "in": "path",
+            "description": "Уникальный идентификатор объекта",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
           }
         ],
         "responses": {
@@ -466,27 +509,40 @@
         }
       }
     },
-    "/deposit": {
+    "/event/{uuid}/debtors": {
       "get": {
         "tags": [
-          "deposit-resource"
+          "event-resource"
         ],
-        "summary": "Поиск депозитов",
-        "operationId": "getAllDepositResource",
+        "summary": "Получение списка должников",
+        "operationId": "getDebtorsEventResource",
         "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "Уникальный идентификатор события",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
           {
             "name": "offset",
             "in": "query",
+            "description": "Количество записей которое необходимо пропустить",
             "required": false,
             "schema": {
               "type": "integer",
               "format": "int32",
-              "default": 0
+              "default": 10
             }
           },
           {
             "name": "numberOfRows",
             "in": "query",
+            "description": "Размер страницы",
             "required": false,
             "schema": {
               "type": "integer",
@@ -520,11 +576,13 @@
           {
             "name": "uuid",
             "in": "path",
+            "description": "Уникальный идентификатор депозита",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
           }
         ],
         "responses": {
@@ -539,23 +597,72 @@
             }
           }
         }
-      }
-    },
-    "/debt/person/{person}": {
-      "get": {
+      },
+      "delete": {
         "tags": [
-          "debt-resource"
+          "deposit-resource"
         ],
-        "summary": "Получение списка событий по которым пользователь не рассчитался",
-        "operationId": "getDebtsDebtResource",
+        "summary": "Удаление депозита",
+        "operationId": "deleteDepositResource",
         "parameters": [
           {
-            "name": "person",
+            "name": "uuid",
             "in": "path",
+            "description": "Уникальный идентификатор депозита",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/deposit/{uuid}/debts": {
+      "get": {
+        "tags": [
+          "deposit-resource"
+        ],
+        "summary": "Получение списка долгов пользователя",
+        "operationId": "getDebtsDepositResource",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "Уникальный идентификатор депозита",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Количество записей которое необходимо пропустить",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "numberOfRows",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
             }
           }
         ],
@@ -573,31 +680,20 @@
         }
       }
     },
-    "/debt/event/{event}": {
+    "/deposit/me": {
       "get": {
         "tags": [
-          "debt-resource"
+          "deposit-resource"
         ],
-        "summary": "Получение списка должников",
-        "operationId": "getDebtorsDebtResource",
-        "parameters": [
-          {
-            "name": "event",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
+        "summary": "Получение депозита авторизованного пользователя",
+        "operationId": "getDepositResource_1",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageDeposit"
+                  "$ref": "#/components/schemas/Deposit"
                 }
               }
             }
@@ -631,31 +727,39 @@
     "schemas": {
       "Option": {
         "type": "object",
+        "description": "Короткая информация об объекте",
         "properties": {
           "uuid": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "description": "Уникальный иденитификатор"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Название"
           }
         }
       },
       "Transaction": {
         "type": "object",
+        "description": "Объекта",
         "properties": {
           "uuid": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "description": "Уникальный иденитификатор"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Название"
           },
           "cash": {
-            "type": "number"
+            "type": "string",
+            "description": "Сумма"
           },
           "type": {
             "type": "string",
+            "description": "Тип",
             "enum": [
               "NONE",
               "COST",
@@ -666,106 +770,131 @@
             ]
           },
           "person": {
-            "$ref": "#/components/schemas/Option"
+            "$ref": "#/components/schemas/Option",
+            "description": "Пользователь"
           },
           "event": {
-            "$ref": "#/components/schemas/Option"
+            "$ref": "#/components/schemas/Option",
+            "description": "Событие"
           },
           "transactionDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Дата транзакии"
           },
           "creationDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Дата создания"
           },
           "author": {
-            "$ref": "#/components/schemas/Option"
+            "$ref": "#/components/schemas/Option",
+            "description": "Автор"
           },
           "deletionDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Дата удаления"
           }
         }
       },
       "Event": {
         "type": "object",
+        "description": "Объекта",
         "properties": {
           "uuid": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "description": "Уникальный иденитификатор"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Название"
           },
           "contribution": {
-            "type": "number"
-          },
-          "total": {
-            "type": "number"
+            "type": "string",
+            "description": "Сумма взноса"
           },
           "deadline": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "До какого числа сдать"
           },
           "creationDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Дата создания"
           },
           "author": {
-            "$ref": "#/components/schemas/Option"
+            "$ref": "#/components/schemas/Option",
+            "description": "Автор"
           },
           "deletionDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Дата удаления"
           }
         }
       },
-      "ExceptionDevice": {
+      "Deposit": {
         "type": "object",
-        "properties": {
-          "device": {
-            "type": "string"
-          },
-          "agent": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "localizedMessage": {
-            "type": "string"
-          },
-          "stackTrace": {
-            "type": "string"
-          }
-        }
-      },
-      "User": {
-        "type": "object",
+        "description": "Депозит",
         "properties": {
           "uuid": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "description": "Уникальный иденитификатор"
           },
-          "name": {
-            "type": "string"
+          "username": {
+            "type": "string",
+            "description": "Имя пользователя"
           },
-          "login": {
-            "type": "string"
+          "firstName": {
+            "type": "string",
+            "description": "Имя"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Фамилия"
+          },
+          "patronymic": {
+            "type": "string",
+            "description": "Отчество"
+          },
+          "deposit": {
+            "type": "string",
+            "description": "Депозит"
+          },
+          "logo": {
+            "type": "string",
+            "description": "Аватар"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "description": "Адрес электронной почты"
           },
-          "phone": {
-            "type": "string"
+          "birthday": {
+            "type": "string",
+            "format": "date-time",
+            "description": "День рождения"
           },
-          "roles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "uniqueItems": true
+          "joiningDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Дата вступления"
+          },
+          "position": {
+            "type": "string",
+            "description": "Должность",
+            "enum": [
+              "PRESIDENT",
+              "VICE_PRESIDENT",
+              "TREASURER",
+              "SECRETARY",
+              "MEMBER",
+              "FRIEND",
+              "NONE"
+            ]
           }
         }
       },
@@ -822,21 +951,6 @@
           }
         }
       },
-      "Deposit": {
-        "type": "object",
-        "properties": {
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string"
-          },
-          "deposit": {
-            "type": "number"
-          }
-        }
-      },
       "PageDeposit": {
         "type": "object",
         "properties": {
@@ -853,13 +967,16 @@
       },
       "Cashbox": {
         "type": "object",
+        "description": "Информация о кассе",
         "properties": {
           "deposit": {
-            "type": "number"
+            "type": "string",
+            "description": "Сумма в кассе"
           },
           "lastUpdateDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Дата последнего изменения"
           }
         }
       }
