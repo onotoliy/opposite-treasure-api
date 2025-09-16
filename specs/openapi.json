@@ -738,7 +738,11 @@
             "type": "string",
             "description": "Название"
           }
-        }
+        },
+        "required": [
+          "name",
+          "uuid"
+        ]
       },
       "Transaction": {
         "type": "object",
@@ -796,7 +800,16 @@
             "format": "date-time",
             "description": "Дата удаления"
           }
-        }
+        },
+        "required": [
+          "author",
+          "cash",
+          "creationDate",
+          "name",
+          "transactionDate",
+          "type",
+          "uuid"
+        ]
       },
       "Event": {
         "type": "object",
@@ -834,7 +847,15 @@
             "format": "date-time",
             "description": "Дата удаления"
           }
-        }
+        },
+        "required": [
+          "author",
+          "contribution",
+          "creationDate",
+          "deadline",
+          "name",
+          "uuid"
+        ]
       },
       "Deposit": {
         "type": "object",
@@ -896,7 +917,19 @@
               "NONE"
             ]
           }
-        }
+        },
+        "required": [
+          "birthday",
+          "deposit",
+          "email",
+          "firstName",
+          "joiningDate",
+          "lastName",
+          "patronymic",
+          "position",
+          "username",
+          "uuid"
+        ]
       },
       "Meta": {
         "type": "object",
@@ -978,7 +1011,11 @@
             "format": "date-time",
             "description": "Дата последнего изменения"
           }
-        }
+        },
+        "required": [
+          "deposit",
+          "lastUpdateDate"
+        ]
       }
     }
   }
