@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8081/api/treasure/v1",
+      "url": "http://91.201.41.66/api/treasure/v1",
       "description": "Generated server url"
     }
   ],
@@ -98,6 +98,36 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       },
@@ -127,6 +157,46 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Конфликт (Conflict)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       },
@@ -153,6 +223,46 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт (Conflict)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
                 }
               }
             }
@@ -208,6 +318,36 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       },
@@ -237,6 +377,46 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Конфликт (Conflict)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       },
@@ -263,6 +443,46 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт (Conflict)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
                 }
               }
             }
@@ -319,7 +539,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Информация о депозитах успешно получена",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -328,8 +548,28 @@
               }
             }
           },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "Ошибка сервера",
+            "description": "Ошибка сервера (Internal Server Error)",
             "content": {
               "application/json": {
                 "schema": {
@@ -366,6 +606,46 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Конфликт (Conflict)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       },
@@ -392,6 +672,46 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Deposit"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт (Conflict)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
                 }
               }
             }
@@ -429,6 +749,36 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       },
@@ -454,6 +804,36 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       }
@@ -488,6 +868,36 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       },
@@ -513,6 +923,36 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       }
@@ -569,6 +1009,36 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       }
@@ -595,7 +1065,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Информация о депозите успешно получена",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -604,8 +1074,28 @@
               }
             }
           },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "Ошибка сервера",
+            "description": "Ошибка сервера (Internal Server Error)",
             "content": {
               "application/json": {
                 "schema": {
@@ -638,6 +1128,36 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера (Internal Server Error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
           }
         }
       }
@@ -686,7 +1206,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Информация о долгах успешно получена",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -695,8 +1215,28 @@
               }
             }
           },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "Ошибка сервера",
+            "description": "Ошибка сервера (Internal Server Error)",
             "content": {
               "application/json": {
                 "schema": {
@@ -714,10 +1254,10 @@
           "deposit-resource"
         ],
         "summary": "Получение депозита авторизованного пользователя",
-        "operationId": "meDepositResource",
+        "operationId": "getDepositResource_1",
         "responses": {
           "200": {
-            "description": "Информация о депозите успешно получена",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -726,8 +1266,28 @@
               }
             }
           },
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Не найдено (Not Found)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "Ошибка сервера",
+            "description": "Ошибка сервера (Internal Server Error)",
             "content": {
               "application/json": {
                 "schema": {
@@ -748,7 +1308,7 @@
         "operationId": "getCashboxResource",
         "responses": {
           "200": {
-            "description": "Успех",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -757,8 +1317,8 @@
               }
             }
           },
-          "401": {
-            "description": "Неверные параметры запроса",
+          "400": {
+            "description": "Неверный запрос (Bad Request)",
             "content": {
               "application/json": {
                 "schema": {
@@ -768,7 +1328,7 @@
             }
           },
           "404": {
-            "description": "Объект не найден",
+            "description": "Не найдено (Not Found)",
             "content": {
               "application/json": {
                 "schema": {
@@ -778,7 +1338,7 @@
             }
           },
           "500": {
-            "description": "Ошибка сервера",
+            "description": "Ошибка сервера (Internal Server Error)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1001,87 +1561,105 @@
       },
       "Meta": {
         "type": "object",
+        "description": "Мета данные о странице",
         "properties": {
           "total": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "Общее количество записей"
           },
           "paging": {
-            "$ref": "#/components/schemas/Paging"
+            "$ref": "#/components/schemas/Paging",
+            "description": "Описание страницы"
           }
-        }
+        },
+        "required": [
+          "paging",
+          "total"
+        ]
       },
       "PageTransaction": {
         "type": "object",
+        "description": "Страница",
         "properties": {
           "meta": {
-            "$ref": "#/components/schemas/Meta"
+            "$ref": "#/components/schemas/Meta",
+            "description": "Мета данные о странице"
           },
           "context": {
             "type": "array",
+            "description": "Содержимое страницы",
             "items": {
               "$ref": "#/components/schemas/Transaction"
             }
           }
-        }
+        },
+        "required": [
+          "context",
+          "meta"
+        ]
       },
       "Paging": {
         "type": "object",
+        "description": "Описание страницы",
         "properties": {
           "start": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "Начальный элемент"
           },
           "size": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "Размер страницы"
           }
-        }
+        },
+        "required": [
+          "size",
+          "start"
+        ]
       },
       "PageEvent": {
         "type": "object",
+        "description": "Страница",
         "properties": {
           "meta": {
-            "$ref": "#/components/schemas/Meta"
+            "$ref": "#/components/schemas/Meta",
+            "description": "Мета данные о странице"
           },
           "context": {
             "type": "array",
+            "description": "Содержимое страницы",
             "items": {
               "$ref": "#/components/schemas/Event"
             }
           }
-        }
+        },
+        "required": [
+          "context",
+          "meta"
+        ]
       },
       "PageDeposit": {
         "type": "object",
+        "description": "Страница",
         "properties": {
           "meta": {
-            "$ref": "#/components/schemas/Meta"
+            "$ref": "#/components/schemas/Meta",
+            "description": "Мета данные о странице"
           },
           "context": {
             "type": "array",
+            "description": "Содержимое страницы",
             "items": {
               "$ref": "#/components/schemas/Deposit"
             }
           }
-        }
-      },
-      "ExceptionInformation": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "INTERNAL_SERVER_ERROR",
-              "BAD_REQUEST",
-              "NOT_FOUND",
-              "CONFLICT"
-            ]
-          },
-          "message": {
-            "type": "string"
-          }
-        }
+        },
+        "required": [
+          "context",
+          "meta"
+        ]
       },
       "Cashbox": {
         "type": "object",
@@ -1100,6 +1678,29 @@
         "required": [
           "deposit",
           "lastUpdateDate"
+        ]
+      },
+      "ExceptionInformation": {
+        "description": "Информация об ошибке",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Статус",
+            "enum": [
+              "INTERNAL_SERVER_ERROR",
+              "BAD_REQUEST",
+              "NOT_FOUND",
+              "CONFLICT"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "Сообщение об ошибке"
+          }
+        },
+        "required": [
+          "message",
+          "status"
         ]
       }
     }
