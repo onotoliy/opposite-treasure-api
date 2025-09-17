@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://91.201.41.66/api/treasure/v1",
+      "url": "http://localhost:8081/api/treasure/v1",
       "description": "Generated server url"
     }
   ],
@@ -319,11 +319,21 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Информация о депозитах успешно получена",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageDeposit"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
                 }
               }
             }
@@ -585,11 +595,21 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Информация о депозите успешно получена",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Deposit"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
                 }
               }
             }
@@ -666,11 +686,21 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Информация о долгах успешно получена",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageEvent"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
                 }
               }
             }
@@ -684,14 +714,24 @@
           "deposit-resource"
         ],
         "summary": "Получение депозита авторизованного пользователя",
-        "operationId": "getDepositResource_1",
+        "operationId": "meDepositResource",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Информация о депозите успешно получена",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Deposit"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
                 }
               }
             }
@@ -708,11 +748,41 @@
         "operationId": "getCashboxResource",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Успех",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Cashbox"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Неверные параметры запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Объект не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionInformation"
                 }
               }
             }
@@ -993,6 +1063,23 @@
             "items": {
               "$ref": "#/components/schemas/Deposit"
             }
+          }
+        }
+      },
+      "ExceptionInformation": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_SERVER_ERROR",
+              "BAD_REQUEST",
+              "NOT_FOUND",
+              "CONFLICT"
+            ]
+          },
+          "message": {
+            "type": "string"
           }
         }
       },
